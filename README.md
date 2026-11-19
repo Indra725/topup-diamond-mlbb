@@ -48,8 +48,9 @@ lalu set `login-page=mlbb.html` di hotspot profile `default`.
 
 Setiap dukungan Anda sangat berarti &amp; membantu kelangsungan proyek ini:
 
+- **Halaman donasi:** https://indra725.github.io/donasi/
+- **QRIS:** scan dari semua e-wallet / m-banking (DAFFIYANET, Konter — NMID ID1025401523762)
 - **E-Wallet (DANA / GoPay / OVO / ShopeePay):** **08516163719** a/n **Daffiyanet**
-- **QRIS:** https://billingservices.daffiyanet.my.id/donate
 - **WhatsApp:** https://wa.me/628516163719
 
 ## Lisensi
