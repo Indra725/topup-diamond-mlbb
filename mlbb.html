@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Daffa ML Store — Top Up Diamond MLBB</title>
-<meta name="description" content="Top up diamond Mobile Legends Bang Bang — login dengan User ID, belanja diamond dengan harga promo." />
+<meta name="description" content="Top up diamond Mobile Legends Bang Bang — login User ID, pilih paket, bayar via QRIS/E-Wallet, diamond masuk dalam 1 detik." />
 <link rel="icon" href="logo.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,11 +14,12 @@
     --gold: #f5c542;
     --gold-2: #ffd66e;
     --gold-3: #ffb300;
+    --gold-deep: #8b4a00;
+    --gold-shadow: #5a2e00;
     --orange: #ff7a1a;
     --cyan: #00e1ff;
     --bg-deep: #05021a;
     --panel: rgba(14, 7, 52, 0.92);
-    --panel-solid: #14102d;
     --border: rgba(245, 197, 66, 0.35);
     --text: #f8f1e4;
     --muted: #a89ad6;
@@ -62,8 +63,8 @@
   @media (max-width: 980px) { main { grid-template-columns: 1fr; padding: 16px 18px 36px; gap: 18px; } }
 
   /* ===== LEFT — HERO + STORE ===== */
-  .hero { display: flex; flex-direction: column; gap: 14px; justify-content: center; padding: 48px 0; }
-  @media (max-width: 980px) { .hero { padding: 12px 0 4px; text-align: center; align-items: center; } }
+  .hero { display: flex; flex-direction: column; gap: 14px; justify-content: center; padding: 40px 0; }
+  @media (max-width: 980px) { .hero { padding: 8px 0; text-align: center; align-items: center; } }
 
   .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-family: 'Orbitron', monospace; font-size: 11px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; }
   .eyebrow::before, .eyebrow::after { content: ""; display: block; width: 32px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold)); }
@@ -84,6 +85,7 @@
   @media (max-width: 980px) { .trust { justify-content: center; } }
   .trust span { display: flex; align-items: center; gap: 8px; background: rgba(0,0,0,0.45); border: 1px solid var(--border); padding: 8px 14px; border-radius: 8px; font-size: 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.4px; color: var(--gold-2); }
 
+  /* Store */
   .store { margin-top: 6px; background: linear-gradient(180deg, rgba(14,7,52,0.92) 0%, rgba(9,4,35,0.92) 100%); border: 1px solid var(--border); border-radius: 18px; padding: 18px 18px 14px; max-width: 560px; box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
   @media (max-width: 980px) { .store { max-width: 640px; width: 100%; } }
   .store-head { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid rgba(245,197,66,0.25); padding-bottom: 10px; margin-bottom: 12px; }
@@ -94,6 +96,7 @@
   @media (max-width: 560px) { .diamonds { grid-template-columns: repeat(3, 1fr); } }
   .pack { border: 1px solid rgba(245,197,66,0.18); background: linear-gradient(160deg, rgba(46,22,94,0.7) 0%, rgba(24,12,55,0.85) 100%); border-radius: 12px; padding: 9px 6px 8px; text-align: center; cursor: pointer; font-family: inherit; color: inherit; transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s; position: relative; width: 100%; }
   .pack:hover { transform: translateY(-3px); border-color: var(--gold); box-shadow: 0 8px 24px rgba(245,197,66,0.22); }
+  .pack.selected { border-color: var(--gold); box-shadow: 0 0 0 2px var(--gold), 0 10px 28px rgba(245,197,66,0.35); }
   .pack.best { border-color: rgba(255,122,26,0.75); box-shadow: 0 0 16px rgba(255,122,26,0.35); }
   .pack.best::before { content: "BEST"; position: absolute; top: -9px; right: -6px; font-family: 'Orbitron', monospace; font-size: 9px; letter-spacing: 1px; color: #2a1400; background: linear-gradient(180deg,#ffe08a 0%,#ffb300 100%); padding: 2px 8px; border-radius: 4px; }
   .pack .gem { font-size: 26px; line-height: 1; }
@@ -101,203 +104,323 @@
   .pack .amount small { display: block; font-size: 9px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
   .pack .price { font-family: 'Orbitron', monospace; font-size: 10px; font-weight: 700; color: var(--gold); margin-top: 4px; }
 
-  .checkout { margin-top: 12px; background: rgba(245,197,66,0.06); border: 1px dashed rgba(245,197,66,0.35); padding: 12px 14px; border-radius: 10px; font-family: 'Rajdhani', sans-serif; }
-  .checkout .row { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
-  .pick-list { color: #fff; font-size: 12px; min-height: 1em; }
+  .checkout-bar { margin-top: 12px; background: rgba(245,197,66,0.06); border: 1px dashed rgba(245,197,66,0.35); padding: 12px 14px; border-radius: 10px; }
+  .bar-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; font-family: 'Rajdhani', sans-serif; }
+  .pick-list { color: #fff; font-size: 13px; }
   .total { text-align: right; }
   .total small { font-size: 10px; color: var(--muted); letter-spacing: 1px; }
   .total .val { font-family: 'Orbitron', monospace; font-size: 19px; font-weight: 800; color: var(--gold); }
   .total .val small { color: var(--gold-3); }
-  .btn-checkout { margin-top: 10px; width: 100%; background: linear-gradient(180deg, #ffe08a 0%, #f5c542 32%, #d4880e 62%, #8b4a00 100%); color: #2a1400; border: none; border-radius: 10px; padding: 13px; font-family: 'Cinzel', serif; font-size: 15px; font-weight: 800; letter-spacing: 2px; cursor: pointer; box-shadow: 0 4px 0 #5a2e00, inset 0 1px 0 rgba(255,255,255,0.6); }
-  .btn-checkout:active { transform: translateY(2px); box-shadow: 0 2px 0 #5a2e00; }
 
-  /* ===== RIGHT — PANEL LOGIN + CHECKOUT ===== */
-  .panel { display: flex; flex-direction: column; gap: 14px; justify-content: center; padding: 48px 0; }
-  @media (max-width: 980px) { .panel { padding: 0 0 36px; } }
+  .btn-buy { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; margin-top: 12px; background: linear-gradient(180deg, #ffe08a 0%, #f5c542 32%, #d4880e 62%, #8b4a00 100%); color: #2a1400; border: none; border-radius: 12px; padding: 16px; font-family: 'Cinzel', serif; font-size: 18px; font-weight: 800; letter-spacing: 2.5px; cursor: pointer; box-shadow: 0 6px 0 var(--gold-shadow, #5a2e00), 0 14px 40px rgba(245,197,66,0.35), inset 0 1px 0 rgba(255,255,255,0.6); text-transform: uppercase; }
+  .btn-buy:disabled { cursor: not-allowed; opacity: 0.55; filter: grayscale(0.6); }
+  .btn-buy:not(:disabled):active { transform: translateY(4px); }
 
-  .panel-inner {
+  /* ===== RIGHT — LOGIN + DONATE ===== */
+  .side { display: flex; flex-direction: column; gap: 14px; align-items: flex-end; padding: 48px 0; }
+  @media (max-width: 980px) { .side { padding: 0 0 36px; align-items: center; } }
+
+  .panel {
+    width: 100%; max-width: 430px;
     background: linear-gradient(180deg, rgba(14,7,52,0.94) 0%, rgba(9,4,35,0.94) 100%);
     border: 1px solid rgba(245,197,66,0.4);
     border-radius: 22px;
     padding: 26px 26px 20px;
-    max-width: 430px; width: 100%;
-    margin-left: auto;
     box-shadow: 0 0 0 1px rgba(245,197,66,0.08), 0 30px 80px rgba(0,0,0,0.7), inset 0 0 40px rgba(108,43,217,0.2);
     backdrop-filter: blur(12px);
-    position: relative; overflow: hidden;
+    position: relative;
   }
-  .panel-inner::before {
+  .panel::before {
     content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
     background: linear-gradient(90deg, transparent 0%, var(--gold) 20%, var(--orange) 50%, var(--gold) 80%, transparent 100%);
     box-shadow: 0 0 16px rgba(245,197,66,0.6);
   }
-  @media (max-width: 980px) { .panel-inner { margin: 0 auto; } }
+  .panel h2 { font-family: 'Cinzel', serif; color: var(--gold); font-size: 22px; letter-spacing: 2px; text-align: center; }
+  .sub-center { text-align: center; color: var(--muted); font-size: 12.5px; margin-top: 2px; }
 
-  .panel-inner h2 { font-family: 'Cinzel', serif; color: var(--gold); font-size: 22px; letter-spacing: 2px; text-align: center; }
-  .sub-center { text-align: center; color: var(--muted); font-size: 12.5px; }
-
-  form.login { display: flex; flex-direction: column; gap: 11px; margin-top: 2px; }
-  label { font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; }
-  input[type=text], input[type=password] { background: rgba(5,2,26,0.8); border: 1px solid rgba(245,197,66,0.22); border-radius: 10px; color: var(--text); padding: 13px 14px; font-size: 14px; transition: border-color 0.15s, box-shadow 0.15s; }
+  form.login { display: flex; flex-direction: column; gap: 11px; margin-top: 8px; }
+  label { font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: 1.5px; }
+  input[type=text], input[type=password], input[type=tel] { background: rgba(5,2,26,0.8); border: 1px solid rgba(245,197,66,0.22); border-radius: 10px; color: var(--text); padding: 13px 14px; font-size: 14px; }
   input::placeholder { color: #6b629c; }
   input:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(245,197,66,0.18); }
 
-  .btn-hero { background: linear-gradient(180deg, #ffe08a 0%, #f5c542 32%, #d4880e 62%, #8b4a00 100%); color: #2a1400; border: none; border-radius: 12px; padding: 15px 18px; font-family: 'Cinzel', serif; font-size: 16px; font-weight: 800; letter-spacing: 2px; cursor: pointer; box-shadow: 0 5px 0 #5a2e00, inset 0 1px 0 rgba(255,255,255,0.6); text-transform: uppercase; }
-  .btn-hero:active { transform: translateY(3px); box-shadow: 0 2px 0 #5a2e00; }
+  .btn-login { background: linear-gradient(180deg, #ffe08a 0%, #f5c542 32%, #d4880e 62%, #8b4a00 100%); color: #2a1400; border: none; border-radius: 12px; padding: 14px 18px; font-family: 'Cinzel', serif; font-size: 16px; font-weight: 800; letter-spacing: 2px; cursor: pointer; box-shadow: 0 5px 0 #5a2e00, inset 0 1px 0 rgba(255,255,255,0.6); text-transform: uppercase; }
+  .btn-login:active { transform: translateY(3px); box-shadow: 0 2px 0 #5a2e00; }
 
   .hint { text-align: center; color: var(--muted); font-size: 11px; }
   .hint a { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(245,197,66,0.35); }
 
-  /* Checkout section (muncul hanya saat beli) */
-  .game-data { display: none; border: 1px solid rgba(0,225,255,0.35); background: rgba(0,225,255,0.06); border-radius: 14px; padding: 16px; }
-  .game-data h3 { font-family: 'Cinzel', serif; color: var(--gold); font-size: 15px; letter-spacing: 1.5px; margin-bottom: 4px; }
-  .game-data .pill { display: inline-block; font-size: 10px; color: var(--cyan); font-family: 'Orbitron', monospace; border: 1px solid var(--cyan); padding: 2px 8px; border-radius: 3px; letter-spacing: 1px; margin-bottom: 10px; }
-  .game-summary { text-align: center; padding: 10px; background: rgba(245,197,66,0.08); border-radius: 10px; margin-bottom: 10px; }
-  .game-summary .pack-name { font-family: 'Cinzel', serif; font-size: 26px; color: var(--gold); }
-  .game-summary .pack-price { font-family: 'Orbitron', monospace; color: #fff; font-size: 18px; margin-top: 2px; }
-
-  .wa-link { display: flex; justify-content: center; align-items: center; gap: 8px; background: rgba(16,185,129,0.14); border: 1px solid #10b981; color: #6ee7b7; text-decoration: none; padding: 12px; border-radius: 10px; font-size: 12px; font-weight: 600; }
-
-  /* Donation */
-  .donate { display: flex; align-items: center; gap: 10px; border: 1px solid rgba(245,197,66,0.28); background: linear-gradient(90deg, rgba(255,46,166,0.1) 0%, rgba(245,197,66,0.1) 100%); border-radius: 12px; padding: 10px 12px; font-family: 'Rajdhani', sans-serif; font-size: 11px; color: var(--muted); }
+  .donate { width: 100%; max-width: 430px; display: flex; align-items: center; gap: 10px; border: 1px solid rgba(245,197,66,0.28); background: linear-gradient(90deg, rgba(255,46,166,0.1) 0%, rgba(245,197,66,0.1) 100%); border-radius: 12px; padding: 10px 12px; font-family: 'Rajdhani', sans-serif; font-size: 11px; color: var(--muted); }
   .donate .mono { font-family: 'Orbitron', monospace; color: var(--gold); font-size: 12px; }
   .donate a { color: var(--gold); text-decoration: none; }
 
   footer { position: relative; z-index: 1; text-align: center; padding: 10px; background: rgba(5,2,26,0.75); backdrop-filter: blur(6px); border-top: 1px solid rgba(245,197,66,0.2); font-family: 'Rajdhani', sans-serif; font-size: 10px; color: #776fae; }
+
+  /* ===== CHECKOUT OVERLAY (penuh layar) ===== */
+  .overlay { position: fixed; inset: 0; z-index: 50; display: none; align-items: flex-start; justify-content: center; overflow-y: auto; background: radial-gradient(ellipse at 50% 20%, rgba(245,197,66,0.18) 0%, rgba(5,2,26,0.92) 55%); backdrop-filter: blur(6px); }
+  .overlay.open { display: flex; }
+  .overlay-inner { max-width: 900px; width: 100%; padding: 22px 24px 40px; position: relative; }
+  .overlay-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid rgba(245,197,66,0.25); padding-bottom: 12px; margin-bottom: 14px; }
+  .overlay-head h2 { font-family: 'Cinzel', serif; color: var(--gold); font-size: 22px; letter-spacing: 2px; }
+  .overlay-head small { color: var(--muted); font-size: 12px; }
+  .btn-close { background: rgba(255,255,255,0.05); border: 1px solid rgba(245,197,66,0.3); color: var(--gold); width: 40px; height: 40px; border-radius: 10px; font-size: 20px; cursor: pointer; }
+
+  .checkout-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 20px; }
+  @media (max-width: 820px) { .checkout-grid { grid-template-columns: 1fr; } }
+
+  .summary-card { background: linear-gradient(180deg, rgba(14,7,52,0.92) 0%, rgba(9,4,35,0.92) 100%); border: 1px solid var(--border); border-radius: 16px; padding: 20px; }
+  .summary-card .label { font-family: 'Rajdhani', sans-serif; color: var(--muted); font-size: 11px; letter-spacing: 1.5px; }
+  .summary-card .pack-name { font-family: 'Cinzel', serif; color: var(--gold); font-size: 38px; font-weight: 800; letter-spacing: 1px; }
+  .summary-card .pack-price { font-family: 'Orbitron', monospace; font-size: 22px; color: #fff; margin-top: 6px; }
+  .summary-card .pack-price small { color: var(--gold-3); font-size: 13px; }
+  .divider { border: 0; border-top: 1px solid rgba(245,197,66,0.2); margin: 14px 0; }
+  .meta-row { display: flex; justify-content: space-between; gap: 10px; color: var(--muted); font-size: 12px; font-family: 'Rajdhani', sans-serif; }
+  .meta-row b { color: #fff; font-family: 'Exo 2', sans-serif; font-weight: 600; }
+
+  .section-title { font-family: 'Cinzel', serif; color: var(--gold); font-size: 14px; letter-spacing: 2px; margin: 4px 0 10px; display: flex; align-items: center; gap: 10px; }
+  .section-title .step-num { display: inline-grid; place-items: center; width: 22px; height: 22px; background: var(--gold); color: #2a1400; font-family: 'Orbitron', monospace; font-size: 12px; border-radius: 4px; }
+
+  .field-group { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+  .checkout-panel { background: linear-gradient(180deg, rgba(14,7,52,0.92) 0%, rgba(9,4,35,0.92) 100%); border: 1px solid var(--border); border-radius: 16px; padding: 20px; }
+
+  /* Payment methods */
+  .pay-methods { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 14px; }
+  @media (max-width: 560px) { .pay-methods { grid-template-columns: repeat(2, 1fr); } }
+  .pm { background: rgba(5,2,26,0.75); border: 1.5px solid rgba(245,197,66,0.18); border-radius: 10px; padding: 10px 8px; text-align: center; color: var(--text); cursor: pointer; font-family: inherit; transition: border-color 0.15s, transform 0.15s; }
+  .pm:hover { border-color: var(--gold); transform: translateY(-2px); }
+  .pm.selected { border-color: var(--gold); box-shadow: 0 0 16px rgba(245,197,66,0.3), inset 0 0 12px rgba(245,197,66,0.1); }
+  .pm .icon { font-size: 26px; }
+  .pm .name { font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 700; color: #fff; margin-top: 4px; }
+  .pm .fee { font-size: 10px; color: var(--muted); }
+
+  .total-amount { background: rgba(245,197,66,0.1); border: 1px dashed rgba(245,197,66,0.4); border-radius: 10px; padding: 12px 14px; text-align: right; }
+  .total-amount small { color: var(--muted); letter-spacing: 1px; font-size: 10px; }
+  .total-amount .val { font-family: 'Orbitron', monospace; font-size: 22px; color: var(--gold); font-weight: 800; }
+
+  .btn-confirm { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; background: linear-gradient(180deg, #ffe08a 0%, #f5c542 32%, #d4880e 62%, #8b4a00 100%); color: #2a1400; border: none; border-radius: 12px; padding: 16px; font-family: 'Cinzel', serif; font-size: 17px; font-weight: 800; letter-spacing: 2px; cursor: pointer; box-shadow: 0 5px 0 #5a2e00, inset 0 1px 0 rgba(255,255,255,0.6); }
+  .btn-confirm:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  /* Success screen */
+  .success { display: none; text-align: center; padding: 30px 16px 10px; }
+  .success.show { display: block; }
+  .success .check { font-size: 64px; }
+  .success h3 { font-family: 'Cinzel', serif; color: var(--gold); font-size: 26px; margin: 10px 0 6px; }
+  .success p { color: var(--text); font-size: 14px; }
+  .success .detail { background: rgba(245,197,66,0.08); border: 1px solid rgba(245,197,66,0.25); border-radius: 10px; padding: 12px; margin: 14px auto; max-width: 360px; text-align: left; font-family: 'Rajdhani', sans-serif; }
+  .success .detail b { color: #fff; }
+  .ref-code { font-family: 'Orbitron', monospace; font-size: 14px; color: #fff; letter-spacing: 2px; background: rgba(0,0,0,0.4); padding: 8px 12px; border-radius: 6px; display: inline-block; margin: 8px 0; }
 </style>
 </head>
 <body>
 
 <main>
+  <!-- ===== LEFT — HERO + STORE ===== -->
   <section class="hero">
-    <span class="eyebrow">✦ Official MLBB Top-Up Dealer ✦</span>
+    <span class="eyebrow">✦ Official MLBB Dealer ✦</span>
     <h1><span class="dim">TOP UP</span>Diamond MLBB<br/>Masuk Dalam Detik.</h1>
-    <p class="sub">Beli diamond MLBB — login dengan User ID kamu, pilih paket, dan diamond langsung masuk ke akun game kamu dalam 1 detik.</p>
+    <p class="sub">Login → pilih paket → bayar lewat E-Wallet/QRIS → diamond langsung masuk ke akun MLBB kamu.</p>
 
-    <div class="trust" aria-label="Trust badges">
+    <div class="trust">
       <span>⚡ 1 detik delivery</span>
-      <span>🛡️ Aman &amp; terpercaya</span>
+      <span>🛡️ Aman &amp; resmi</span>
       <span>💎 10.000+ order</span>
       <span>★ Rating 4.9</span>
     </div>
 
-    <!-- STORE -->
-    <div class="store" aria-label="Daftar paket diamond">
+    <div class="store" aria-label="Paket diamond">
       <div class="store-head">
         <h2>PILIH PAKET</h2>
         <small>Tekan paket → beli</small>
       </div>
       <div class="diamonds" id="packGrid"></div>
 
-      <div class="checkout" aria-live="polite">
-        <div class="row">
-          <div class="pick-list">Paket terpilih: <strong id="pickName">— belum dipilih —</strong></div>
+      <div class="checkout-bar" aria-live="polite">
+        <div class="bar-row">
+          <div class="pick-list">Paket: <strong id="pickName">— pilih dulu —</strong></div>
           <div class="total">
             <small>TOTAL</small>
             <div class="val"><small>Rp&nbsp;</small><span id="cartTotal">0</span></div>
           </div>
         </div>
-        <button class="btn-checkout" id="btnCheckout" disabled>BELI SEKARANG</button>
+        <button class="btn-buy" id="btnBuy" disabled>🛒 Beli Sekarang</button>
       </div>
     </div>
   </section>
 
-  <aside class="panel" aria-label="Area login &amp; checkout">
-    <div class="panel-inner">
+  <!-- ===== RIGHT — LOGIN + DONATE ===== -->
+  <aside class="side" aria-label="Area login">
+    <div class="panel">
       <h2>LOGIN</h2>
       <p class="sub-center">Masuk dengan User ID MLBB kamu.</p>
-
-      <!-- FORM LOGIN (disembunyikan setelah berhasil login) -->
-      <form class="login" id="loginForm">
+      <form class="login" id="loginForm" autocomplete="off">
         <div>
           <label for="username">User ID</label>
-          <input type="text" id="username" placeholder="contoh: 12345678 ( dari profile MLBB )" autocomplete="username" required />
+          <input type="text" id="username" placeholder="mis: 12345678 ( dari profile MLBB )" autocomplete="username" required />
         </div>
         <div>
           <label for="password">PIN</label>
           <input type="password" id="password" placeholder="PIN 4-6 digit" autocomplete="current-password" required />
         </div>
-        <button type="submit" class="btn-hero">Login</button>
+        <button type="submit" class="btn-login">Login</button>
         <div class="hint">Belum punya akun? <a href="https://wa.me/628516163719" target="_blank" rel="noreferrer">Daftar via WA</a></div>
       </form>
+    </div>
 
-      <!-- FORM DATA GAME — muncul hanya saat klik BELI -->
-      <div class="game-data" id="gameDataForm" aria-label="Data Game MLBB">
-        <span class="pill">DATA GAME</span>
-        <h3>Lengkapi Data Game</h3>
-
-        <div class="game-summary">
-          <div class="pack-name" id="sumName">—</div>
-          <div class="pack-price" id="sumPrice">Rp 0</div>
-        </div>
-
-        <form class="login" id="mlbbForm" action="$(link-login-only)" method="post">
-          <input type="hidden" name="dst" value="$(link-orig)" />
-          <div>
-            <label for="zoneId">Zone ID</label>
-            <input type="text" id="zoneId" name="zoneId" placeholder="contoh: 5010 ( dari profile MLBB )" autocomplete="off" required />
-          </div>
-          <div>
-            <label for="serverId">Server / Realm</label>
-            <input type="text" id="serverId" name="serverId" placeholder="contoh: Indonesia (Server: 5010)" autocomplete="off" required />
-          </div>
-          <div>
-            <label for="nickname">Nickname (opsional)</label>
-            <input type="text" id="nickname" name="nickname" placeholder="contoh: ARSSYT" autocomplete="nickname" />
-          </div>
-          <button type="submit" class="btn-hero">BAYAR SEKARANG</button>
-          <div class="hint">Pastikan <strong>Zone ID</strong> &amp; <strong>User ID</strong> benar. Diamond tidak bisa dikembalikan.</div>
-        </form>
-      </div>
-
-      <a class="wa-link" href="https://wa.me/628516163719" target="_blank" rel="noreferrer">💬 Tanya via WhatsApp: 08516163719</a>
-
-      <div class="donate" role="note">
-        💛 Support ML Store: <span class="mono">08516163719</span> a/n Daffiyanet · <a href="https://billingservices.daffiyanet.my.id/donate" target="_blank" rel="noreferrer">QRIS</a>
-      </div>
+    <div class="donate" role="note">
+      💛 Support ML Store: <span class="mono">08516163719</span> a/n Daffiyanet · <a href="https://billingservices.daffiyanet.my.id/donate" target="_blank" rel="noreferrer">QRIS</a>
     </div>
   </aside>
 </main>
 
+<!-- ===== CHECKOUT OVERLAY ===== -->
+<div class="overlay" id="checkoutOverlay" role="dialog" aria-modal="true" aria-label="Checkout">
+  <div class="overlay-inner">
+    <div class="overlay-head">
+      <div>
+        <h2>CHECKOUT</h2>
+        <small>Lengkapi data game MLBB kamu</small>
+      </div>
+      <button class="btn-close" id="btnCloseCheckout" aria-label="Tutup">×</button>
+    </div>
+
+    <!-- State biasa: form checkout -->
+    <div id="checkoutContent">
+      <div class="checkout-grid">
+        <!-- Ringkasan paket -->
+        <aside class="summary-card" aria-label="Ringkasan pesanan">
+          <div class="label">PAKET YANG KAMU PILIH</div>
+          <div class="pack-name" id="sumName">—</div>
+          <div class="pack-price"><small style="font-size:12px;color:var(--muted);font-family:'Rajdhani'">TOTAL</small><br/><span id="sumPrice">Rp 0</span></div>
+          <hr class="divider" />
+          <div class="meta-row"><span>User ID</span><b id="sumUserId">—</b></div>
+          <div class="meta-row"><span>Nickname</span><b id="sumNickname">—</b></div>
+          <div class="meta-row"><span>Zona / Server</span><b id="sumServer">—</b></div>
+          <div class="meta-row"><span>Status</span><b style="color:var(--ok)">Menunggu pembayaran</b></div>
+        </aside>
+
+        <!-- Form checkout -->
+        <div>
+          <!-- STEP 1: Data game -->
+          <div class="checkout-panel" aria-label="Data game MLBB">
+            <div class="section-title"><span class="step-num">1</span> Data Game MLBB</div>
+            <div class="field-group">
+              <div>
+                <label for="zoneId">Zone ID *</label>
+                <input type="text" id="zoneId" placeholder="mis: 5010 (lihat di profile MLBB)" autocomplete="off" required />
+              </div>
+              <div>
+                <label for="serverId">Server / Realm *</label>
+                <input type="text" id="serverId" placeholder="mis: Indonesia (5010) — otomatis terisi dari Zone ID" autocomplete="off" required readonly />
+              </div>
+              <div>
+                <label for="nickname">Nickname MLBB (untuk konfirmasi)</label>
+                <input type="text" id="nickname" placeholder="contoh: ARSSYT_" autocomplete="nickname" />
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 2: Metode pembayaran -->
+          <div class="checkout-panel" style="margin-top:14px" aria-label="Metode pembayaran">
+            <div class="section-title"><span class="step-num">2</span> Metode Pembayaran</div>
+            <div class="pay-methods" id="payMethods" role="radiogroup" aria-label="Pilih metode pembayaran"></div>
+
+            <label for="phone">No. WhatsApp (untuk kirim nota &amp; kode top-up)</label>
+            <input type="tel" id="phone" placeholder="0812xxxxxxxx" autocomplete="tel" />
+
+            <div class="total-amount" style="margin-top:12px">
+              <small>TOTAL YANG HARUS DIBAYAR</small>
+              <div class="val"><small>Rp&nbsp;</small><span id="payTotal">0</span></div>
+            </div>
+
+            <button class="btn-confirm" id="btnConfirm" disabled style="margin-top:12px">Buat Pesanan →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success state -->
+    <div class="success" id="checkoutSuccess" role="status" aria-live="polite">
+      <div class="check">✅</div>
+      <h3>Pesanan Berhasil Dibuat!</h3>
+      <p>Terima kasih, <b id="successUserId">Kamu</b> — pesanan kamu sedang diproses.</p>
+      <div class="detail">
+        <div class="meta-row"><span>Paket</span><b id="successPack">—</b></div>
+        <div class="meta-row"><span>User ID</span><b id="successUserId2">—</b></div>
+        <div class="meta-row"><span>Metode</span><b id="successMethod">—</b></div>
+        <div class="meta-row"><span>Total</span><b id="successTotal">—</b></div>
+      </div>
+      <div class="ref-code" id="successRef">REF: ______</div>
+      <p style="font-size:12px;color:var(--muted);margin-top:6px">Kode top-up dikirim ke WhatsApp kamu. Setelah pembayaran terverifikasi, diamond masuk ke akun MLBB kamu dalam 1 menit.</p>
+      <button class="btn-confirm" id="btnDone" style="max-width:320px;margin:14px auto 0">Selesai</button>
+    </div>
+  </div>
+</div>
+
 <footer>DAFFA ML STORE · JL. DAFFIYANET NO. 11 · 08516163719 · DIAMOND MASUK AKUN · POWERED BY DAFFIYANET</footer>
 
 <script>
-  // Harga diamond (bisa diedit)
+  // ===== Daftar paket diamond (bisa diedit) =====
   const PACKAGES = [
-    { icon: '💎', amount: '5', price: 1500, save: 'Starter' },
-    { icon: '💎', amount: '12', price: 3000, save: 'Starter' },
-    { icon: '💎', amount: '28', price: 6000, save: 'Starter' },
-    { icon: '💛', amount: '81', price: 19000, save: 'Value', tier: 'best' },
-    { icon: '💛', amount: '165', price: 36000, save: 'Value', tier: 'best' },
-    { icon: '💎', amount: '275', price: 70000, save: 'Best Seller' },
-    { icon: '💎', amount: '429', price: 105000, save: 'Value' },
-    { icon: '🧡', amount: '560', price: 135000, save: 'Rare Check' },
-    { icon: '🍊', amount: '1120', price: 265000, save: 'Pro' },
-    { icon: '🟣', amount: '2275', price: 525000, save: 'Pro+' },
-    { icon: '💠', amount: '3450', price: 785000, save: 'Whale' },
-    { icon: '🔷', amount: '5700', price: 1285000, save: 'Whale+', tier: 'best' }
+    { icon: '💎', amount: '5',     price: 1500,   label: '5 Diamond' },
+    { icon: '💎', amount: '12',    price: 3000,   label: '12 Diamond' },
+    { icon: '💎', amount: '28',    price: 6000,   label: '28 Diamond' },
+    { icon: '💛', amount: '81',    price: 19000,  label: '81 Diamond', best: true },
+    { icon: '💛', amount: '165',   price: 36000,  label: '165 Diamond', best: true },
+    { icon: '💎', amount: '275',   price: 70000,  label: '275 Diamond' },
+    { icon: '💎', amount: '429',   price: 105000, label: '429 Diamond' },
+    { icon: '🧡', amount: '560',   price: 135000, label: '560 Diamond' },
+    { icon: '🍊', amount: '1120',  price: 265000, label: '1120 Diamond' },
+    { icon: '🟣', amount: '2275',  price: 525000, label: '2275 Diamond' },
+    { icon: '💠', amount: '3450',  price: 785000, label: '3450 Diamond' },
+    { icon: '🔷', amount: '5700',  price: 1285000,label: '5700 Diamond', best: true },
+  ];
+
+  // Metode pembayaran
+  const METHODS = [
+    { id: 'qris', icon: '💠', name: 'QRIS',        fee: 'Rp 0',  sub: 'Semua e-wallet & bank' },
+    { id: 'dana', icon: '🔵', name: 'DANA',        fee: 'Rp 0',  sub: 'Saldo DANA' },
+    { id: 'gopay',icon: '🟢', name: 'GoPay',       fee: 'Rp 0',  sub: 'GoPay / Gojek' },
+    { id: 'ovo',  icon: '🟣', name: 'OVO',         fee: 'Rp 0',  sub: 'OVO & OVO Merchant' },
+    { id: 'shopee',icon:'🟠', name: 'ShopeePay',   fee: 'Rp 0',  sub: 'ShopeePay' },
+    { id: 'bca',  icon: '🏦', name: 'Transfer BCA',fee: 'Rp 0',  sub: 'VA BCA' },
+    { id: 'mandiri',icon:'🏦',name: 'Transfer Mandiri',fee:'Rp 0',sub: 'VA Mandiri' },
+    { id: 'bri',  icon: '🏦', name: 'Transfer BRI',fee: 'Rp 0',  sub: 'VA BRI' },
+    { id: 'bni',  icon: '🏦', name: 'Transfer BNI',fee: 'Rp 0',  sub: 'VA BNI' },
   ];
 
   const grid = document.getElementById('packGrid');
   const pickName = document.getElementById('pickName');
   const cartTotal = document.getElementById('cartTotal');
-  const btnCheckout = document.getElementById('btnCheckout');
+  const btnBuy = document.getElementById('btnBuy');
+  const overlay = document.getElementById('checkoutOverlay');
   const loginForm = document.getElementById('loginForm');
-  const gameDataForm = document.getElementById('gameDataForm');
-  const zoneIdInput = document.getElementById('zoneId');
-  const serverIdInput = document.getElementById('serverId');
-  const nicknameInput = document.getElementById('nickname');
   const sumName = document.getElementById('sumName');
   const sumPrice = document.getElementById('sumPrice');
+  const sumUserId = document.getElementById('sumUserId');
+  const sumNickname = document.getElementById('sumNickname');
+  const sumServer = document.getElementById('sumServer');
+  const zoneId = document.getElementById('zoneId');
+  const serverId = document.getElementById('serverId');
+  const nickname = document.getElementById('nickname');
+  const phone = document.getElementById('phone');
+  const payMethods = document.getElementById('payMethods');
+  const payTotal = document.getElementById('payTotal');
+  const btnConfirm = document.getElementById('btnConfirm');
+  const btnClose = document.getElementById('btnCloseCheckout');
+  const checkoutContent = document.getElementById('checkoutContent');
+  const checkoutSuccess = document.getElementById('checkoutSuccess');
+  const doneBtn = document.getElementById('btnDone');
 
   const fmt = (n) => n.toLocaleString('id-ID');
   let selected = null;
-  let loggedIn = false;
+  let currentMethod = null;
+  let loggedInUser = null;
 
+  // Render paket
   PACKAGES.forEach((p) => {
     const el = document.createElement('button');
     el.type = 'button';
-    el.className = 'pack' + (p.tier === 'best' ? ' best' : '');
+    el.className = 'pack' + (p.best ? ' best' : '');
     el.setAttribute('aria-label', `Pilih ${p.amount} diamond Rp ${fmt(p.price)}`);
     el.innerHTML = `
       <div class="gem">${p.icon}</div>
@@ -305,45 +428,131 @@
       <div class="price">Rp ${fmt(p.price)}</div>`;
     el.addEventListener('click', () => {
       selected = p;
-      pickName.textContent = `${p.amount} Diamond`;
+      grid.querySelectorAll('.pack').forEach((x) => x.classList.remove('selected'));
+      el.classList.add('selected');
+      pickName.textContent = p.label;
       cartTotal.textContent = fmt(p.price);
-      btnCheckout.disabled = false;
+      btnBuy.disabled = false;
+      if (loggedInUser) { sumName.textContent = p.label; sumPrice.textContent = 'Rp ' + fmt(p.price); }
+      payTotal.textContent = fmt(p.price);
     });
     grid.appendChild(el);
   });
 
-  // Login sederhana
+  // Render metode pembayaran
+  METHODS.forEach((m) => {
+    const el = document.createElement('button');
+    el.type = 'button';
+    el.className = 'pm';
+    el.setAttribute('role', 'radio');
+    el.setAttribute('aria-checked', 'false');
+    el.setAttribute('aria-label', `Metode ${m.name}`);
+    el.innerHTML = `
+      <div class="icon">${m.icon}</div>
+      <div class="name">${m.name}</div>
+      <div class="fee">${m.fee}</div>`;
+    el.addEventListener('click', () => {
+      currentMethod = m;
+      payMethods.querySelectorAll('.pm').forEach((x) => x.classList.remove('selected'));
+      payMethods.querySelectorAll('.pm').forEach((x) => x.setAttribute('aria-checked', 'false'));
+      el.classList.add('selected');
+      el.setAttribute('aria-checked', 'true');
+      validateCheckout();
+    });
+    payMethods.appendChild(el);
+  });
+
+  // Zone ID → auto set Server ID (mirror User ID)
+  zoneId.addEventListener('input', () => {
+    serverId.value = zoneId.value ? `Indonesia (${zoneId.value})` : '';
+    sumServer.textContent = serverId.value || '—';
+    validateCheckout();
+  });
+  nickname.addEventListener('input', () => { sumNickname.textContent = nickname.value.trim() || '—'; validateCheckout(); });
+  phone.addEventListener('input', validateCheckout);
+
+  function validateCheckout() {
+    const ok = selected && zoneId.value.trim().length >= 3 && phone.value.replace(/\D/g,'').length >= 9 && currentMethod;
+    btnConfirm.disabled = !ok;
+  }
+
+  // Login
   loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const user = document.getElementById('username').value.trim();
-    const pass = document.getElementById('password').value.trim();
-    if (!user || !pass) return;
-    sessionStorage.setItem('mlbb_user', user);
-    loggedIn = true;
+    const u = document.getElementById('username').value.trim();
+    const p = document.getElementById('password').value.trim();
+    if (!u || !p) return;
+    loggedInUser = u;
+    sessionStorage.setItem('mlbb_user', u);
+    // Sembunyikan form, ganti heading
     loginForm.style.display = 'none';
-    // Sembunyikan heading "LOGIN" + sub saat sudah login
-    document.querySelector('.panel-inner h2').textContent = `SELAMAT DATANG, ${user}`;
-    document.querySelector('.sub-center').textContent = 'Pilih paket di kiri, lalu klik BELI SEKARANG di form di bawah.';
+    document.querySelector('.panel h2').textContent = `SELAMAT DATANG`;
+    document.querySelector('.sub-center').textContent = `Login sebagai User ID ${u}. Pilih paket di kiri untuk mulai.`;
+    if (selected) { sumUserId.textContent = u; sumName.textContent = selected.label; sumPrice.textContent = 'Rp ' + fmt(selected.price); }
   });
 
-  // Klik BELI → tampilkan form data game
-  btnCheckout.addEventListener('click', () => {
+  // Klik Beli → overlay checkout
+  btnBuy.addEventListener('click', () => {
     if (!selected) return;
-    if (!loggedIn && sessionStorage.getItem('mlbb_user')) loggedIn = true;
-    if (!loggedIn) {
-      alert('Silakan login dulu (User ID + PIN) untuk memilih paket.');
-      return;
+    if (!loggedInUser) {
+      const u = sessionStorage.getItem('mlbb_user');
+      if (!u) { alert('Silakan login dulu (User ID + PIN) untuk membeli.'); return; }
+      loggedInUser = u;
+      loginForm.style.display = 'none';
+      document.querySelector('.panel h2').textContent = 'SELAMAT DATANG';
+      document.querySelector('.sub-center').textContent = `Login sebagai User ID ${u}. Pilih paket di kiri lalu klik BELI.`;
+      sumUserId.textContent = u;
     }
-    sumName.textContent = `${selected.amount} Diamond`;
-    sumPrice.textContent = `Rp ${fmt(selected.price)}`;
-    gameDataForm.style.display = 'block';
-    gameDataForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    zoneIdInput.focus();
+    // Isi ringkasan
+    sumName.textContent = selected.label;
+    sumPrice.textContent = 'Rp ' + fmt(selected.price);
+    payTotal.textContent = fmt(selected.price);
+    sumUserId.textContent = loggedInUser;
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    // Reset ke form state
+    checkoutContent.style.display = '';
+    checkoutSuccess.classList.remove('show');
+    zoneId.focus();
+    // Autofill kalau login di form ini
+    if (document.getElementById('username').value.trim()) {
+      // biarkan zoneId kosong supaya user isi manual
+    }
+    validateCheckout();
   });
 
-  // Set server label saat focus zoneId
-  zoneIdInput.addEventListener('focus', () => {
-    if (!serverIdInput.value) serverIdInput.value = zoneIdInput.value ? zoneIdInput.value : '';
+  btnClose.addEventListener('click', () => {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+
+  btnConfirm.addEventListener('click', () => {
+    if (btnConfirm.disabled) return;
+    const userId = loggedInUser || sessionStorage.getItem('mlbb_user') || 'Kamu';
+    const ref = 'ML-' + Date.now().toString().slice(-8) + '-' + Math.floor(Math.random() * 9000 + 1000).toString();
+    // Populate success state
+    document.getElementById('successUserId').textContent = userId;
+    document.getElementById('successUserId2').textContent = userId;
+    document.getElementById('successPack').textContent = selected.label;
+    document.getElementById('successMethod').textContent = currentMethod.name;
+    document.getElementById('successTotal').textContent = 'Rp ' + fmt(selected.price);
+    document.getElementById('successRef').textContent = 'REF: ' + ref;
+    checkoutContent.style.display = 'none';
+    checkoutSuccess.classList.add('show');
+    // Save created order in sessionStorage (demo only)
+    sessionStorage.setItem('mlbb_last_order', JSON.stringify({ ref, userId, pack: selected.label, total: selected.price, method: currentMethod.name, phone: phone.value }));
+  });
+
+  doneBtn.addEventListener('click', () => {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+
+  // Esc menutup overlay
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) {
+      overlay.classList.remove('open'); document.body.style.overflow = '';
+    }
   });
 </script>
 </body>
