@@ -3,28 +3,27 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>MLBB Diamond Top-Up — Daffa ML Store</title>
-<meta name="description" content="Top up diamond Mobile Legends Bang Bang — harga promo, masuk akun dalam hitungan detik." />
+<title>Daffa ML Store — Top Up Diamond MLBB</title>
+<meta name="description" content="Top up diamond Mobile Legends Bang Bang — login dengan User ID, belanja diamond dengan harga promo." />
 <link rel="icon" href="logo.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Exo+2:wght@500;600;700;800&family=Rajdhani:wght@500;600;700&family=Orbitron:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Exo+2:wght@500;600;700;800&family=Rajdhani:wght@500;600;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --gold: #f5c542;
     --gold-2: #ffd66e;
     --gold-3: #ffb300;
     --orange: #ff7a1a;
-    --purple: #6c2bd9;
-    --magenta: #ff2ea6;
     --cyan: #00e1ff;
-    --bg: #0a0530;
     --bg-deep: #05021a;
-    --panel: rgba(12, 6, 48, 0.82);
-    --panel-solid: #0e0734;
+    --panel: rgba(14, 7, 52, 0.92);
+    --panel-solid: #14102d;
     --border: rgba(245, 197, 66, 0.35);
     --text: #f8f1e4;
     --muted: #a89ad6;
+    --ok: #22c55e;
+    --warn: #f59e0b;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { height: 100%; }
@@ -34,44 +33,37 @@
     min-height: 100vh;
     overflow-x: hidden;
     background:
-      radial-gradient(ellipse 700px 400px at 78% 28%, rgba(255,46,166,0.38) 0%, transparent 60%),
-      radial-gradient(ellipse 520px 380px at 88% 55%, rgba(0,225,255,0.28) 0%, transparent 60%),
-      radial-gradient(ellipse 900px 700px at 75% 90%, rgba(108,43,217,0.42) 0%, transparent 65%),
+      radial-gradient(ellipse 700px 400px at 78% 28%, rgba(255,46,166,0.28) 0%, transparent 60%),
+      radial-gradient(ellipse 520px 380px at 88% 55%, rgba(0,225,255,0.2) 0%, transparent 60%),
+      radial-gradient(ellipse 900px 700px at 75% 90%, rgba(108,43,217,0.38) 0%, transparent 65%),
       linear-gradient(160deg, #120b3a 0%, #0a0530 30%, #05021a 100%);
   }
-  /* Decorative starfield grid pattern */
   body::before {
     content: "";
     position: fixed; inset: 0;
     background-image:
-      linear-gradient(rgba(245,197,66,0.055) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(245,197,66,0.055) 1px, transparent 1px);
+      linear-gradient(rgba(245,197,66,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(245,197,66,0.05) 1px, transparent 1px);
     background-size: 52px 52px;
     mask-image: radial-gradient(ellipse 70% 60% at 80% 40%, rgba(0,0,0,0.9) 0%, transparent 75%);
-    z-index: 0;
-    pointer-events: none;
+    z-index: 0; pointer-events: none;
   }
-  /* Hero emblem — layered gold ring backdrop (diagonal magic circle) */
   body::after {
     content: "";
     position: fixed;
     right: -140px; top: 40%;
     width: 620px; height: 620px;
     border-radius: 50%;
-    border: 2px solid rgba(245,197,66,0.32);
-    box-shadow:
-      0 0 60px rgba(245,197,66,0.22),
-      0 0 140px rgba(255,122,26,0.22),
-      inset 0 0 80px rgba(245,197,66,0.12);
-    z-index: 0;
-    pointer-events: none;
+    border: 2px solid rgba(245,197,66,0.28);
+    box-shadow: 0 0 60px rgba(245,197,66,0.2), 0 0 140px rgba(255,122,26,0.2), inset 0 0 80px rgba(245,197,66,0.1);
+    z-index: 0; pointer-events: none;
   }
-  main { position: relative; z-index: 1; min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; max-width: 1280px; margin: 0 auto; padding: 0 28px; }
-  @media (max-width: 980px) { main { grid-template-columns: 1fr; padding: 0 18px; } }
+  main { position: relative; z-index: 1; min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; max-width: 1280px; margin: 0 auto; padding: 0 28px; gap: 28px; align-items: center; }
+  @media (max-width: 980px) { main { grid-template-columns: 1fr; padding: 16px 18px 36px; gap: 18px; } }
 
-  /* ============ LEFT — HERO ============ */
-  .hero { display: flex; flex-direction: column; justify-content: center; gap: 14px; padding: 56px 36px 56px 0; }
-  @media (max-width: 980px) { .hero { padding: 44px 0 16px; text-align: center; align-items: center; } }
+  /* ===== LEFT — HERO + STORE ===== */
+  .hero { display: flex; flex-direction: column; gap: 14px; justify-content: center; padding: 48px 0; }
+  @media (max-width: 980px) { .hero { padding: 12px 0 4px; text-align: center; align-items: center; } }
 
   .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-family: 'Orbitron', monospace; font-size: 11px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; }
   .eyebrow::before, .eyebrow::after { content: ""; display: block; width: 32px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold)); }
@@ -79,165 +71,112 @@
 
   h1 {
     font-family: 'Cinzel', serif;
-    font-size: clamp(40px, 5vw, 64px);
-    font-weight: 800;
-    line-height: 1.02;
-    letter-spacing: 1px;
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 800; line-height: 1.02; letter-spacing: 1px;
     background: linear-gradient(180deg, #fff7d9 0%, #ffd66e 30%, #e6a017 55%, #7a4500 100%);
     -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 60px rgba(245,197,66,0.35);
   }
-  h1 .dim { -webkit-text-fill-color: #fff; color: #fff; text-shadow: 0 2px 14px rgba(0,0,0,0.4); display: block; font-size: 0.55em; letter-spacing: 4px; margin-bottom: 4px; }
+  h1 .dim { -webkit-text-fill-color: #fff; color: #fff; display: block; font-size: 0.55em; letter-spacing: 4px; margin-bottom: 4px; }
 
-  .sub { color: var(--text); font-size: 15px; max-width: 540px; opacity: 0.92; line-height: 1.55; font-weight: 500; }
+  .sub { color: var(--text); opacity: 0.9; font-size: 15px; max-width: 540px; line-height: 1.55; font-weight: 500; }
 
-  .trust { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+  .trust { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 2px; }
   @media (max-width: 980px) { .trust { justify-content: center; } }
-  .trust span { display: flex; align-items: center; gap: 8px; background: rgba(0,0,0,0.45); border: 1px solid var(--border); padding: 8px 14px; border-radius: 8px; font-size: 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.4px; color: var(--gold-2); backdrop-filter: blur(4px); }
+  .trust span { display: flex; align-items: center; gap: 8px; background: rgba(0,0,0,0.45); border: 1px solid var(--border); padding: 8px 14px; border-radius: 8px; font-size: 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.4px; color: var(--gold-2); }
 
-  /* Diamond store panel */
-  .store {
-    margin-top: 8px;
-    background: linear-gradient(180deg, rgba(14,7,52,0.88) 0%, rgba(9,4,35,0.88) 100%);
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: 18px 18px 14px;
-    max-width: 560px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(245,197,66,0.18);
-    backdrop-filter: blur(10px);
-  }
+  .store { margin-top: 6px; background: linear-gradient(180deg, rgba(14,7,52,0.92) 0%, rgba(9,4,35,0.92) 100%); border: 1px solid var(--border); border-radius: 18px; padding: 18px 18px 14px; max-width: 560px; box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
   @media (max-width: 980px) { .store { max-width: 640px; width: 100%; } }
   .store-head { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid rgba(245,197,66,0.25); padding-bottom: 10px; margin-bottom: 12px; }
-  .store-head h2 { font-family: 'Cinzel', serif; font-weight: 700; letter-spacing: 2px; font-size: 18px; color: var(--gold); }
+  .store-head h2 { font-family: 'Cinzel', serif; font-weight: 700; letter-spacing: 2px; font-size: 17px; color: var(--gold); }
   .store-head small { color: var(--muted); font-size: 11px; }
 
   .diamonds { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
   @media (max-width: 560px) { .diamonds { grid-template-columns: repeat(3, 1fr); } }
-  .pack {
-    border: 1px solid rgba(245,197,66,0.18);
-    background: linear-gradient(160deg, rgba(46,22,94,0.7) 0%, rgba(24,12,55,0.8) 100%);
-    border-radius: 12px;
-    padding: 9px 6px 8px;
-    text-align: center;
-    cursor: pointer;
-    font-family: inherit;
-    color: inherit;
-    transition: transform 0.15s ease, border-color 0.15s, box-shadow 0.15s;
-    position: relative;
-  }
-  .pack:hover { transform: translateY(-3px); border-color: var(--gold); box-shadow: 0 8px 28px rgba(245,197,66,0.25); }
-  .pack.tier-best { border-color: rgba(255,122,26,0.75); box-shadow: 0 0 18px rgba(255,122,26,0.3), inset 0 0 12px rgba(255,122,26,0.18); }
-  .pack.tier-best::before { content: "BEST"; position: absolute; top: -9px; right: -6px; font-family: 'Orbitron', monospace; font-size: 9px; letter-spacing: 1px; color: #2a1400; background: linear-gradient(180deg,#ffe08a 0%,#ffb300 100%); padding: 2px 8px; border-radius: 4px; box-shadow: 0 2px 10px rgba(255,180,0,0.55); }
-  .pack .gem { font-size: 26px; filter: drop-shadow(0 2px 4px rgba(0,225,255,0.5)); }
-  .pack .amount { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 15px; color: #fff; line-height: 1.1; margin-top: 2px; }
+  .pack { border: 1px solid rgba(245,197,66,0.18); background: linear-gradient(160deg, rgba(46,22,94,0.7) 0%, rgba(24,12,55,0.85) 100%); border-radius: 12px; padding: 9px 6px 8px; text-align: center; cursor: pointer; font-family: inherit; color: inherit; transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s; position: relative; width: 100%; }
+  .pack:hover { transform: translateY(-3px); border-color: var(--gold); box-shadow: 0 8px 24px rgba(245,197,66,0.22); }
+  .pack.best { border-color: rgba(255,122,26,0.75); box-shadow: 0 0 16px rgba(255,122,26,0.35); }
+  .pack.best::before { content: "BEST"; position: absolute; top: -9px; right: -6px; font-family: 'Orbitron', monospace; font-size: 9px; letter-spacing: 1px; color: #2a1400; background: linear-gradient(180deg,#ffe08a 0%,#ffb300 100%); padding: 2px 8px; border-radius: 4px; }
+  .pack .gem { font-size: 26px; line-height: 1; }
+  .pack .amount { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 15px; color: #fff; margin-top: 3px; }
   .pack .amount small { display: block; font-size: 9px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
   .pack .price { font-family: 'Orbitron', monospace; font-size: 10px; font-weight: 700; color: var(--gold); margin-top: 4px; }
 
-  .cart { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; background: rgba(245,197,66,0.06); border: 1px dashed rgba(245,197,66,0.35); padding: 10px 14px; border-radius: 10px; }
-  .cart-info { font-size: 11px; color: var(--muted); font-family: 'Rajdhani', sans-serif; letter-spacing: 0.5px; line-height: 1.35; }
-  .cart-info .items { color: #fff; font-size: 12px; margin-top: 2px; }
-  .cart-total { text-align: right; }
-  .cart-total small { font-size: 10px; color: var(--muted); font-family: 'Rajdhani', sans-serif; letter-spacing: 1px; }
-  .cart-total .val { font-family: 'Orbitron', monospace; font-size: 17px; font-weight: 800; color: var(--gold); }
-  .cart-total .val small { font-size: 9px; color: var(--gold-3); }
+  .checkout { margin-top: 12px; background: rgba(245,197,66,0.06); border: 1px dashed rgba(245,197,66,0.35); padding: 12px 14px; border-radius: 10px; font-family: 'Rajdhani', sans-serif; }
+  .checkout .row { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .pick-list { color: #fff; font-size: 12px; min-height: 1em; }
+  .total { text-align: right; }
+  .total small { font-size: 10px; color: var(--muted); letter-spacing: 1px; }
+  .total .val { font-family: 'Orbitron', monospace; font-size: 19px; font-weight: 800; color: var(--gold); }
+  .total .val small { color: var(--gold-3); }
+  .btn-checkout { margin-top: 10px; width: 100%; background: linear-gradient(180deg, #ffe08a 0%, #f5c542 32%, #d4880e 62%, #8b4a00 100%); color: #2a1400; border: none; border-radius: 10px; padding: 13px; font-family: 'Cinzel', serif; font-size: 15px; font-weight: 800; letter-spacing: 2px; cursor: pointer; box-shadow: 0 4px 0 #5a2e00, inset 0 1px 0 rgba(255,255,255,0.6); }
+  .btn-checkout:active { transform: translateY(2px); box-shadow: 0 2px 0 #5a2e00; }
 
-  /* ============ RIGHT — LOGIN PANEL ============ */
-  .panel {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 14px;
-    padding: 56px 0;
-  }
-  @media (max-width: 980px) { .panel { padding: 0 0 48px; } }
+  /* ===== RIGHT — PANEL LOGIN + CHECKOUT ===== */
+  .panel { display: flex; flex-direction: column; gap: 14px; justify-content: center; padding: 48px 0; }
+  @media (max-width: 980px) { .panel { padding: 0 0 36px; } }
 
   .panel-inner {
-    background: linear-gradient(180deg, rgba(14,7,52,0.92) 0%, rgba(9,4,35,0.92) 100%);
+    background: linear-gradient(180deg, rgba(14,7,52,0.94) 0%, rgba(9,4,35,0.94) 100%);
     border: 1px solid rgba(245,197,66,0.4);
     border-radius: 22px;
-    padding: 28px 28px 22px;
-    max-width: 420px;
-    width: 100%;
+    padding: 26px 26px 20px;
+    max-width: 430px; width: 100%;
     margin-left: auto;
-    box-shadow: 0 0 0 1px rgba(245,197,66,0.1), 0 30px 80px rgba(0,0,0,0.7), inset 0 0 40px rgba(108,43,217,0.18);
+    box-shadow: 0 0 0 1px rgba(245,197,66,0.08), 0 30px 80px rgba(0,0,0,0.7), inset 0 0 40px rgba(108,43,217,0.2);
     backdrop-filter: blur(12px);
-    position: relative;
-    overflow: hidden;
+    position: relative; overflow: hidden;
   }
   .panel-inner::before {
-    content: "";
-    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
     background: linear-gradient(90deg, transparent 0%, var(--gold) 20%, var(--orange) 50%, var(--gold) 80%, transparent 100%);
-    box-shadow: 0 0 18px rgba(245,197,66,0.7);
+    box-shadow: 0 0 16px rgba(245,197,66,0.6);
   }
   @media (max-width: 980px) { .panel-inner { margin: 0 auto; } }
 
-  .panel-inner h2 { font-family: 'Cinzel', serif; color: var(--gold); font-size: 24px; letter-spacing: 2px; text-align: center; text-shadow: 0 0 20px rgba(245,197,66,0.4); }
-  .panel-inner .sub { text-align: center; color: var(--muted); font-size: 12.5px; margin-top: 2px; }
+  .panel-inner h2 { font-family: 'Cinzel', serif; color: var(--gold); font-size: 22px; letter-spacing: 2px; text-align: center; }
+  .sub-center { text-align: center; color: var(--muted); font-size: 12.5px; }
 
-  form.login { display: flex; flex-direction: column; gap: 12px; margin-top: 4px; }
+  form.login { display: flex; flex-direction: column; gap: 11px; margin-top: 2px; }
   label { font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; }
-  input[type=text], input[type=password] {
-    background: rgba(5,2,26,0.75);
-    border: 1px solid rgba(245,197,66,0.22);
-    border-radius: 10px;
-    color: var(--text);
-    padding: 13px 14px;
-    font-size: 14px;
-    font-family: inherit;
-    transition: border-color 0.15s, box-shadow 0.15s;
-  }
+  input[type=text], input[type=password] { background: rgba(5,2,26,0.8); border: 1px solid rgba(245,197,66,0.22); border-radius: 10px; color: var(--text); padding: 13px 14px; font-size: 14px; transition: border-color 0.15s, box-shadow 0.15s; }
   input::placeholder { color: #6b629c; }
-  input:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(245,197,66,0.18), 0 0 24px rgba(245,197,66,0.25); }
+  input:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(245,197,66,0.18); }
 
-  .btn-hero {
-    background: linear-gradient(180deg, #ffe08a 0%, #f5c542 32%, #d4880e 62%, #8b4a00 100%);
-    color: #2a1400;
-    border: none;
-    border-radius: 12px;
-    padding: 16px 18px;
-    font-family: 'Cinzel', serif;
-    font-size: 17px;
-    font-weight: 800;
-    letter-spacing: 2.5px;
-    cursor: pointer;
-    box-shadow: 0 6px 0 #5a2e00, 0 14px 40px rgba(245,197,66,0.35), inset 0 1px 0 rgba(255,255,255,0.6);
-    transition: transform 0.1s ease, box-shadow 0.1s ease;
-    text-transform: uppercase;
-  }
-  .btn-hero:hover { transform: translateY(-2px); box-shadow: 0 8px 0 #5a2e00, 0 20px 50px rgba(245,197,66,0.45), inset 0 1px 0 rgba(255,255,255,0.7); }
-  .btn-hero:active { transform: translateY(4px); box-shadow: 0 2px 0 #5a2e00, 0 6px 18px rgba(245,197,66,0.3), inset 0 1px 0 rgba(255,255,255,0.5); }
+  .btn-hero { background: linear-gradient(180deg, #ffe08a 0%, #f5c542 32%, #d4880e 62%, #8b4a00 100%); color: #2a1400; border: none; border-radius: 12px; padding: 15px 18px; font-family: 'Cinzel', serif; font-size: 16px; font-weight: 800; letter-spacing: 2px; cursor: pointer; box-shadow: 0 5px 0 #5a2e00, inset 0 1px 0 rgba(255,255,255,0.6); text-transform: uppercase; }
+  .btn-hero:active { transform: translateY(3px); box-shadow: 0 2px 0 #5a2e00; }
 
   .hint { text-align: center; color: var(--muted); font-size: 11px; }
-  .hint a { color: var(--gold); text-decoration: none; font-weight: 700; border-bottom: 1px solid rgba(245,197,66,0.35); }
+  .hint a { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(245,197,66,0.35); }
+
+  /* Checkout section (muncul hanya saat beli) */
+  .game-data { display: none; border: 1px solid rgba(0,225,255,0.35); background: rgba(0,225,255,0.06); border-radius: 14px; padding: 16px; }
+  .game-data h3 { font-family: 'Cinzel', serif; color: var(--gold); font-size: 15px; letter-spacing: 1.5px; margin-bottom: 4px; }
+  .game-data .pill { display: inline-block; font-size: 10px; color: var(--cyan); font-family: 'Orbitron', monospace; border: 1px solid var(--cyan); padding: 2px 8px; border-radius: 3px; letter-spacing: 1px; margin-bottom: 10px; }
+  .game-summary { text-align: center; padding: 10px; background: rgba(245,197,66,0.08); border-radius: 10px; margin-bottom: 10px; }
+  .game-summary .pack-name { font-family: 'Cinzel', serif; font-size: 26px; color: var(--gold); }
+  .game-summary .pack-price { font-family: 'Orbitron', monospace; color: #fff; font-size: 18px; margin-top: 2px; }
+
+  .wa-link { display: flex; justify-content: center; align-items: center; gap: 8px; background: rgba(16,185,129,0.14); border: 1px solid #10b981; color: #6ee7b7; text-decoration: none; padding: 12px; border-radius: 10px; font-size: 12px; font-weight: 600; }
 
   /* Donation */
-  .donate {
-    display: flex; align-items: center; gap: 10px;
-    border: 1px solid rgba(245,197,66,0.28);
-    background: linear-gradient(90deg, rgba(255,46,166,0.1) 0%, rgba(245,197,66,0.12) 100%);
-    border-radius: 12px;
-    padding: 10px 12px;
-    font-family: 'Rajdhani', sans-serif; font-size: 11px; color: var(--muted); letter-spacing: 0.4px;
-  }
-  .donate .mono { font-family: 'Orbitron', monospace; color: var(--gold); font-size: 13px; letter-spacing: 1px; }
+  .donate { display: flex; align-items: center; gap: 10px; border: 1px solid rgba(245,197,66,0.28); background: linear-gradient(90deg, rgba(255,46,166,0.1) 0%, rgba(245,197,66,0.1) 100%); border-radius: 12px; padding: 10px 12px; font-family: 'Rajdhani', sans-serif; font-size: 11px; color: var(--muted); }
+  .donate .mono { font-family: 'Orbitron', monospace; color: var(--gold); font-size: 12px; }
   .donate a { color: var(--gold); text-decoration: none; }
 
-  footer { position: relative; z-index: 1; text-align: center; padding: 12px; background: rgba(5,2,26,0.7); backdrop-filter: blur(6px); border-top: 1px solid rgba(245,197,66,0.2); font-family: 'Rajdhani', sans-serif; font-size: 11px; color: #776fae; letter-spacing: 0.5px; }
+  footer { position: relative; z-index: 1; text-align: center; padding: 10px; background: rgba(5,2,26,0.75); backdrop-filter: blur(6px); border-top: 1px solid rgba(245,197,66,0.2); font-family: 'Rajdhani', sans-serif; font-size: 10px; color: #776fae; }
 </style>
 </head>
 <body>
 
 <main>
-  <!-- LEFT / HERO + STORE -->
   <section class="hero">
     <span class="eyebrow">✦ Official MLBB Top-Up Dealer ✦</span>
     <h1><span class="dim">TOP UP</span>Diamond MLBB<br/>Masuk Dalam Detik.</h1>
-    <p class="sub">Beli diamond Mobile Legends Bang Bang dengan harga promo. Pilih paket, login sekali, dan diamond langsung masuk ke akun kamu — 24/7, tanpa ribet.</p>
+    <p class="sub">Beli diamond MLBB — login dengan User ID kamu, pilih paket, dan diamond langsung masuk ke akun game kamu dalam 1 detik.</p>
 
     <div class="trust" aria-label="Trust badges">
       <span>⚡ 1 detik delivery</span>
-      <span>🛡️ Aman &amp; resmi</span>
+      <span>🛡️ Aman &amp; terpercaya</span>
       <span>💎 10.000+ order</span>
       <span>★ Rating 4.9</span>
     </div>
@@ -245,49 +184,76 @@
     <!-- STORE -->
     <div class="store" aria-label="Daftar paket diamond">
       <div class="store-head">
-        <h2>PILIH DIAMOND</h2>
-        <small>Tekan paket → keranjang</small>
+        <h2>PILIH PAKET</h2>
+        <small>Tekan paket → beli</small>
       </div>
       <div class="diamonds" id="packGrid"></div>
-      <div class="cart" aria-live="polite">
-        <div class="cart-info">
-          <div>KERANJANG</div>
-          <div class="items" id="cartItems">— kosong —</div>
+
+      <div class="checkout" aria-live="polite">
+        <div class="row">
+          <div class="pick-list">Paket terpilih: <strong id="pickName">— belum dipilih —</strong></div>
+          <div class="total">
+            <small>TOTAL</small>
+            <div class="val"><small>Rp&nbsp;</small><span id="cartTotal">0</span></div>
+          </div>
         </div>
-        <div class="cart-total">
-          <small>TOTAL BAYAR</small>
-          <div class="val"><small>Rp&nbsp;</small><span id="cartTotal">0</span></div>
-        </div>
+        <button class="btn-checkout" id="btnCheckout" disabled>BELI SEKARANG</button>
       </div>
     </div>
   </section>
 
-  <!-- RIGHT / LOGIN -->
-  <aside class="panel" aria-label="Form login">
+  <aside class="panel" aria-label="Area login &amp; checkout">
     <div class="panel-inner">
-      <h2>LOGIN AKUN</h2>
-      <p class="sub">Masukkan ID MLBB kamu untuk top up diamond.</p>
+      <h2>LOGIN</h2>
+      <p class="sub-center">Masuk dengan User ID MLBB kamu.</p>
 
-      <form class="login" name="login" action="$(link-login-only)" method="post">
-        <input type="hidden" name="dst" value="$(link-orig)" />
+      <!-- FORM LOGIN (disembunyikan setelah berhasil login) -->
+      <form class="login" id="loginForm">
         <div>
-          <label for="username">ID MLBB (Zone)</label>
-          <input type="text" id="username" name="username" placeholder="12345678" autocomplete="username" required />
-        </div>
-        <div>
-          <label for="server">Server ID</label>
-          <input type="text" id="server" name="server" placeholder="5010" autocomplete="off" />
+          <label for="username">User ID</label>
+          <input type="text" id="username" placeholder="contoh: 12345678 ( dari profile MLBB )" autocomplete="username" required />
         </div>
         <div>
           <label for="password">PIN</label>
-          <input type="password" id="password" name="password" autocomplete="current-password" required />
+          <input type="password" id="password" placeholder="PIN 4-6 digit" autocomplete="current-password" required />
         </div>
-        <button type="submit" class="btn-hero">Top Up Sekarang</button>
+        <button type="submit" class="btn-hero">Login</button>
         <div class="hint">Belum punya akun? <a href="https://wa.me/628516163719" target="_blank" rel="noreferrer">Daftar via WA</a></div>
       </form>
 
+      <!-- FORM DATA GAME — muncul hanya saat klik BELI -->
+      <div class="game-data" id="gameDataForm" aria-label="Data Game MLBB">
+        <span class="pill">DATA GAME</span>
+        <h3>Lengkapi Data Game</h3>
+
+        <div class="game-summary">
+          <div class="pack-name" id="sumName">—</div>
+          <div class="pack-price" id="sumPrice">Rp 0</div>
+        </div>
+
+        <form class="login" id="mlbbForm" action="$(link-login-only)" method="post">
+          <input type="hidden" name="dst" value="$(link-orig)" />
+          <div>
+            <label for="zoneId">Zone ID</label>
+            <input type="text" id="zoneId" name="zoneId" placeholder="contoh: 5010 ( dari profile MLBB )" autocomplete="off" required />
+          </div>
+          <div>
+            <label for="serverId">Server / Realm</label>
+            <input type="text" id="serverId" name="serverId" placeholder="contoh: Indonesia (Server: 5010)" autocomplete="off" required />
+          </div>
+          <div>
+            <label for="nickname">Nickname (opsional)</label>
+            <input type="text" id="nickname" name="nickname" placeholder="contoh: ARSSYT" autocomplete="nickname" />
+          </div>
+          <button type="submit" class="btn-hero">BAYAR SEKARANG</button>
+          <div class="hint">Pastikan <strong>Zone ID</strong> &amp; <strong>User ID</strong> benar. Diamond tidak bisa dikembalikan.</div>
+        </form>
+      </div>
+
+      <a class="wa-link" href="https://wa.me/628516163719" target="_blank" rel="noreferrer">💬 Tanya via WhatsApp: 08516163719</a>
+
       <div class="donate" role="note">
-        💛 Support ML Store: <span class="mono">08516163719</span> a/n Daffiyanet · <a href="https://billingservices.daffiyanet.my.id/donate" target="_blank" rel="noreferrer">QRIS / Donasi</a>
+        💛 Support ML Store: <span class="mono">08516163719</span> a/n Daffiyanet · <a href="https://billingservices.daffiyanet.my.id/donate" target="_blank" rel="noreferrer">QRIS</a>
       </div>
     </div>
   </aside>
@@ -296,43 +262,88 @@
 <footer>DAFFA ML STORE · JL. DAFFIYANET NO. 11 · 08516163719 · DIAMOND MASUK AKUN · POWERED BY DAFFIYANET</footer>
 
 <script>
-  // Daftar paket diamond — harga promo Indonesia (bisa di-edit)
+  // Harga diamond (bisa diedit)
   const PACKAGES = [
-    { icon: '💎', amount: '5',     price: 1500,   save: 'Starter' },
-    { icon: '💎', amount: '12',    price: 3000,   save: 'Starter' },
-    { icon: '💎', amount: '28',    price: 6000,   save: 'Starter' },
-    { icon: '💛', amount: '81',    price: 19000,  save: 'Value', tier: 'best' },
-    { icon: '💛', amount: '165',   price: 36000,  save: 'Value', tier: 'best' },
-    { icon: '💎', amount: '275',   price: 70000,  save: 'Best Seller' },
-    { icon: '💎', amount: '429',   price: 105000, save: 'Value' },
-    { icon: '🧡', amount: '560',   price: 135000, save: 'Rare Check' },
-    { icon: '🍊', amount: '1120',  price: 265000, save: 'Pro' },
-    { icon: '🟣', amount: '2275',  price: 525000, save: 'Pro+' },
-    { icon: '💠', amount: '3450',  price: 785000, save: 'Whale' },
-    { icon: '🔷', amount: '5700',  price: 1285000,save: 'Whale+', tier: 'best' },
+    { icon: '💎', amount: '5', price: 1500, save: 'Starter' },
+    { icon: '💎', amount: '12', price: 3000, save: 'Starter' },
+    { icon: '💎', amount: '28', price: 6000, save: 'Starter' },
+    { icon: '💛', amount: '81', price: 19000, save: 'Value', tier: 'best' },
+    { icon: '💛', amount: '165', price: 36000, save: 'Value', tier: 'best' },
+    { icon: '💎', amount: '275', price: 70000, save: 'Best Seller' },
+    { icon: '💎', amount: '429', price: 105000, save: 'Value' },
+    { icon: '🧡', amount: '560', price: 135000, save: 'Rare Check' },
+    { icon: '🍊', amount: '1120', price: 265000, save: 'Pro' },
+    { icon: '🟣', amount: '2275', price: 525000, save: 'Pro+' },
+    { icon: '💠', amount: '3450', price: 785000, save: 'Whale' },
+    { icon: '🔷', amount: '5700', price: 1285000, save: 'Whale+', tier: 'best' }
   ];
+
   const grid = document.getElementById('packGrid');
-  const cartItems = document.getElementById('cartItems');
+  const pickName = document.getElementById('pickName');
   const cartTotal = document.getElementById('cartTotal');
+  const btnCheckout = document.getElementById('btnCheckout');
+  const loginForm = document.getElementById('loginForm');
+  const gameDataForm = document.getElementById('gameDataForm');
+  const zoneIdInput = document.getElementById('zoneId');
+  const serverIdInput = document.getElementById('serverId');
+  const nicknameInput = document.getElementById('nickname');
+  const sumName = document.getElementById('sumName');
+  const sumPrice = document.getElementById('sumPrice');
+
   const fmt = (n) => n.toLocaleString('id-ID');
-  let total = 0;
-  const picks = [];
+  let selected = null;
+  let loggedIn = false;
+
   PACKAGES.forEach((p) => {
     const el = document.createElement('button');
     el.type = 'button';
-    el.className = 'pack' + (p.tier === 'best' ? ' tier-best' : '');
-    el.setAttribute('aria-label', `Pilih ${p.amount} diamond seharga Rp ${fmt(p.price)}`);
+    el.className = 'pack' + (p.tier === 'best' ? ' best' : '');
+    el.setAttribute('aria-label', `Pilih ${p.amount} diamond Rp ${fmt(p.price)}`);
     el.innerHTML = `
       <div class="gem">${p.icon}</div>
       <div class="amount">${p.amount}<small>Diamond</small></div>
       <div class="price">Rp ${fmt(p.price)}</div>`;
     el.addEventListener('click', () => {
-      picks.push(p);
-      total += p.price;
-      cartItems.textContent = picks.map((x) => x.amount + '💎').join(' + ');
-      cartTotal.textContent = fmt(total);
+      selected = p;
+      pickName.textContent = `${p.amount} Diamond`;
+      cartTotal.textContent = fmt(p.price);
+      btnCheckout.disabled = false;
     });
     grid.appendChild(el);
+  });
+
+  // Login sederhana
+  loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const user = document.getElementById('username').value.trim();
+    const pass = document.getElementById('password').value.trim();
+    if (!user || !pass) return;
+    sessionStorage.setItem('mlbb_user', user);
+    loggedIn = true;
+    loginForm.style.display = 'none';
+    // Sembunyikan heading "LOGIN" + sub saat sudah login
+    document.querySelector('.panel-inner h2').textContent = `SELAMAT DATANG, ${user}`;
+    document.querySelector('.sub-center').textContent = 'Pilih paket di kiri, lalu klik BELI SEKARANG di form di bawah.';
+  });
+
+  // Klik BELI → tampilkan form data game
+  btnCheckout.addEventListener('click', () => {
+    if (!selected) return;
+    if (!loggedIn && sessionStorage.getItem('mlbb_user')) loggedIn = true;
+    if (!loggedIn) {
+      alert('Silakan login dulu (User ID + PIN) untuk memilih paket.');
+      return;
+    }
+    sumName.textContent = `${selected.amount} Diamond`;
+    sumPrice.textContent = `Rp ${fmt(selected.price)}`;
+    gameDataForm.style.display = 'block';
+    gameDataForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    zoneIdInput.focus();
+  });
+
+  // Set server label saat focus zoneId
+  zoneIdInput.addEventListener('focus', () => {
+    if (!serverIdInput.value) serverIdInput.value = zoneIdInput.value ? zoneIdInput.value : '';
   });
 </script>
 </body>
