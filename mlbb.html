@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MLBB Diamond Top-Up — Daffa ML Store</title>
+<meta name="description" content="Top up diamond Mobile Legends Bang Bang — harga murah, langsung masuk akun MLBB kamu." />
+<link rel="icon" href="logo.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500;600;700;800&family=Orbitron:wght@600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #ffb400;
+    --gold-2: #ffd24a;
+    --orange: #ff6b1a;
+    --cyan: #00e1ff;
+    --magenta: #ff2ec4;
+    --bg: #09041a;
+    --bg-2: #140830;
+    --card: rgba(20, 8, 48, 0.85);
+    --border: rgba(0, 225, 255, 0.25);
+    --text: #f0eaff;
+    --muted: #b3a0d6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Exo 2', 'Rajdhani', system-ui, sans-serif; background: radial-gradient(1000px 600px at 15% -10%, rgba(255,46,196,0.22) 0%, transparent 55%), radial-gradient(900px 500px at 110% 100%, rgba(0,225,255,0.22) 0%, transparent 55%), var(--bg); color: var(--text); min-height: 100vh; }
+  .topbar { display: flex; align-items: center; justify-content: space-between; padding: 12px 22px; border-bottom: 1px solid var(--border); background: rgba(9,4,26,0.9); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 10; }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+  .brand-logo { width: 44px; height: 44px; background: linear-gradient(135deg,#ff6b1a,#ffb400); clip-path: polygon(50% 0%, 100% 28%, 100% 72%, 50% 100%, 0% 72%, 0% 28%); display: grid; place-items: center; }
+  .brand-logo span { font-size: 22px; }
+  .brand strong { font-family: 'Orbitron', monospace; font-size: 15px; letter-spacing: 2px; color: var(--gold); }
+  .brand small { color: var(--muted); font-size: 10px; letter-spacing: 0.3px; }
+  .status-pill { font-family: 'Orbitron', monospace; font-size: 10px; color: var(--cyan); background: rgba(0,225,255,0.08); border: 1px solid var(--cyan); padding: 6px 12px; border-radius: 3px; letter-spacing: 1px; box-shadow: 0 0 12px rgba(0,225,255,0.3); }
+
+  main { display: grid; grid-template-columns: 1.1fr 1fr; max-width: 1200px; margin: 0 auto; padding: 20px 20px 40px; gap: 24px; }
+  @media (max-width: 980px) { main { grid-template-columns: 1fr; } }
+
+  .hero { color: var(--text); display: flex; flex-direction: column; gap: 12px; }
+  .eyebrow { font-family: 'Orbitron', monospace; font-size: 10px; letter-spacing: 2px; color: var(--cyan); }
+  h1 { font-family: 'Orbitron', monospace; font-size: clamp(26px, 3.4vw, 40px); line-height: 1.15; font-weight: 800; letter-spacing: 0.5px; text-shadow: 0 0 30px rgba(255,46,196,0.4); }
+  h1 .hl { color: var(--gold); text-shadow: 0 0 20px rgba(255,180,0,0.6); }
+  h1 .hl2 { color: var(--magenta); text-shadow: 0 0 20px rgba(255,46,196,0.6); }
+  .sub { color: var(--muted); font-size: 14px; max-width: 560px; line-height: 1.6; }
+
+  .trust { display: flex; gap: 8px; flex-wrap: wrap; }
+  .trust span { font-size: 11px; background: rgba(255,180,0,0.08); border: 1px solid rgba(255,180,0,0.25); color: var(--gold-2); padding: 6px 10px; border-radius: 3px; letter-spacing: 0.3px; }
+
+  /* Product grid */
+  .shop-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  .shop-head h2 { font-family: 'Orbitron', monospace; font-size: 17px; color: var(--gold); letter-spacing: 1px; }
+  .shop-head small { color: var(--muted); font-size: 11px; }
+  .products { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; max-width: 580px; }
+  @media (max-width: 560px) { .products { grid-template-columns: repeat(2, 1fr); } }
+  .pack { background: linear-gradient(165deg, rgba(40,14,70,0.95) 0%, rgba(18,6,45,0.95) 100%); border: 1px solid rgba(0,225,255,0.18); border-radius: 10px; padding: 8px; text-align: center; cursor: pointer; transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s; position: relative; }
+  .pack:hover { border-color: var(--cyan); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,225,255,0.18); }
+  .pack.best::after { content: 'BEST SELLER'; position: absolute; top: -9px; right: -5px; background: var(--magenta); color: #fff; font-family: 'Orbitron', monospace; font-size: 8px; letter-spacing: 1px; padding: 2px 6px; border-radius: 3px; }
+  .pack .icon { font-size: 28px; line-height: 1; }
+  .pack .name { font-family: 'Rajdhani', sans-serif; font-size: 14px; font-weight: 700; color: var(--gold-2); letter-spacing: 0.5px; margin-top: 2px; }
+  .pack .price { font-family: 'Orbitron', monospace; font-size: 13px; color: #fff; margin-top: 4px; font-weight: 700; }
+  .pack .save { font-size: 10px; color: var(--cyan); letter-spacing: 0.3px; }
+
+  .cart { background: rgba(20,8,48,0.9); border: 1px solid var(--border); border-radius: 12px; padding: 10px 14px; max-width: 580px; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  .cart-title { font-family: 'Orbitron', monospace; font-size: 11px; color: var(--muted); letter-spacing: 1px; }
+  .cart-items { color: #fff; font-size: 12px; min-height: 1em; }
+  .cart-total { font-family: 'Orbitron', monospace; color: var(--gold); font-size: 18px; font-weight: 800; }
+  .cart-total small { color: var(--muted); font-size: 10px; }
+
+  /* Right panel / login */
+  .panel { background: linear-gradient(165deg, rgba(20,8,48,0.9) 0%, rgba(9,4,26,0.9) 100%); border: 1px solid var(--border); border-radius: 18px; padding: 26px 22px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 0 40px rgba(255,46,196,0.12); max-width: 450px; margin-left: auto; width: 100%; }
+  @media (max-width: 980px) { .panel { margin: 0; } }
+  .login-heading { font-family: 'Orbitron', monospace; font-size: 17px; font-weight: 700; color: var(--gold); letter-spacing: 1.5px; }
+  .login-sub { color: var(--muted); font-size: 13px; }
+  form.login { display: flex; flex-direction: column; gap: 10px; }
+  label { font-size: 11px; color: var(--muted); font-family: 'Orbitron', monospace; letter-spacing: 1px; }
+  input[type=text], input[type=password] { background: rgba(5,5,20,0.7); border: 1px solid rgba(0,225,255,0.28); color: var(--text); border-radius: 6px; padding: 12px 14px; font-size: 14px; }
+  input:focus { outline: none; border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(0,225,255,0.18); }
+  .btn { background: linear-gradient(135deg, var(--orange) 0%, var(--gold) 100%); color: #2a1400; border: none; border-radius: 6px; clip-path: polygon(8% 0, 100% 0, 92% 100%, 0 100%); padding: 14px 22px; font-family: 'Orbitron', monospace; font-size: 14px; font-weight: 800; letter-spacing: 1.5px; cursor: pointer; }
+  .hint { text-align: center; color: var(--muted); font-size: 12px; }
+  .hint a { color: var(--cyan); text-decoration: none; font-weight: 600; }
+
+  .donate { border: 1px dashed rgba(0,225,255,0.35); border-radius: 10px; padding: 10px; font-size: 11px; color: var(--muted); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-family: 'Orbitron', monospace; letter-spacing: 0.5px; }
+  .donate .mono { color: var(--cyan); font-weight: 700; }
+  .donate a { color: var(--gold); text-decoration: none; }
+
+  footer { text-align: center; padding: 14px; color: var(--muted); font-size: 11px; border-top: 1px solid var(--border); background: rgba(9,4,26,0.9); font-family: 'Orbitron', monospace; letter-spacing: 0.5px; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="#">
+    <div class="brand-logo" aria-hidden="true"><span>💎</span></div>
+    <span>
+      <strong>DAFFA ML STORE</strong>
+      <small>Mobile Legends Diamond Top-Up</small>
+    </span>
+  </a>
+  <div class="status-pill">⚡ AUTO-DELIVER</div>
+</header>
+
+<main>
+  <section class="hero">
+    <span class="eyebrow">★ OFFICIAL MLBB DIAMOND DEALER ★</span>
+    <h1><span class="hl">Diamond</span><br><span class="hl2">Langsung</span> Masuk<br>Akun MLBB Kamu.</h1>
+    <p class="sub">Top up diamond Mobile Legends Bang Bang — proses 1 detik, harga promo, tanpa harus antri di minimarket.</p>
+
+    <div class="trust" aria-label="Trust badges">
+      <span>⚡ 1 detik langsung</span>
+      <span>🛡️ 100% aman</span>
+      <span>💎 10.000+ order</span>
+      <span>★ Rating 4.9/5</span>
+    </div>
+
+    <div class="shop-head">
+      <h2>Pilih Paket Diamond</h2>
+      <small>Tekan paket → otomatis masuk keranjang</small>
+    </div>
+    <div class="products" id="products" aria-label="Daftar paket diamond"></div>
+
+    <div class="cart" role="status" aria-live="polite">
+      <div>
+        <div class="cart-title">KERANJANG</div>
+        <div class="cart-items" id="cartItems">Keranjang kosong</div>
+      </div>
+      <div style="text-align:right">
+        <div class="cart-title">TOTAL</div>
+        <div class="cart-total"><small>Rp</small> <span id="cartTotal">0</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" aria-label="Form login &amp; pembelian">
+    <div class="login-heading">Login Untuk Beli</div>
+    <div class="login-sub">Masukkan ID MLBB (Zone ID + Server) untuk paket yang kamu pilih di kiri.</div>
+
+    <form class="login" name="login" action="$(link-login-only)" method="post">
+      <input type="hidden" name="dst" value="$(link-orig)" />
+      <div>
+        <label for="username">ID MLBB (Zone ID)</label>
+        <input type="text" id="username" name="username" placeholder="mis: 12345678 ( Zone ID )" autocomplete="username" required />
+      </div>
+      <div>
+        <label for="server">Server</label>
+        <input type="text" id="server" name="server" placeholder="mis: 5010 ( id server )" autocomplete="off" />
+      </div>
+      <div>
+        <label for="password">PIN / Password</label>
+        <input type="password" id="password" name="password" autocomplete="current-password" required />
+      </div>
+      <button type="submit" class="btn">BELI SEKARANG ⚡</button>
+      <div class="hint">Belum login? <a href="https://wa.me/628516163719" target="_blank" rel="noreferrer">Top up lewat kasir (WA)</a></div>
+    </form>
+
+    <div class="donate" role="note">
+      💛 Support ML Store: <span class="mono">08516163719</span> a/n <strong>Daffiyanet</strong> · <a href="https://billingservices.daffiyanet.my.id/donate" target="_blank" rel="noreferrer">QRIS</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  Daffa ML Store · Jl. Daffiyanet No. 11 · 08516163719 · Diamond masuk akun · Powered by Daffiyanet
+</footer>
+
+<script>
+  // Paket diamond MLBB (harga promo, bisa diedit sesuai kebutuhan Anda)
+  const PACKAGES = [
+    { icon: '💎', name: '5 Diamond',     price: 1500,  save: 'Starter' },
+    { icon: '💎', name: '12 Diamond',    price: 3000,  save: 'Hemat' },
+    { icon: '💎', name: '28 Diamond',    price: 6000,  save: 'Populer' },
+    { icon: '💎', name: '81 Diamond',    price: 19000, save: 'Hemat' },
+    { icon: '💛', name: '165 Diamond',   price: 36000, save: 'Value', best: true },
+    { icon: '💎', name: '275 Diamond',   price: 70000, save: 'Best Seller' },
+    { icon: '🟡', name: '429 Diamond',   price: 105000, save: 'Rare Check' },
+    { icon: '🟠', name: '560 Diamond',   price: 135000, save: 'Value' },
+    { icon: '🟣', name: '1120 Diamond',  price: 265000, save: 'Pro' },
+    { icon: '🔴', name: '2275 Diamond',  price: 525000, save: 'Whale' },
+    { icon: '💠', name: '3450 Diamond',  price: 785000, save: 'Whale+' },
+    { icon: '🔷', name: '5700 Diamond',  price: 1285000, save: 'Sultan' }
+  ];
+
+  const grid = document.getElementById('products');
+  const cartItems = document.getElementById('cartItems');
+  const cartTotal = document.getElementById('cartTotal');
+  let total = 0;
+  const bought = [];
+
+  const fmt = (n) => n.toLocaleString('id-ID');
+
+  PACKAGES.forEach((p) => {
+    const el = document.createElement('button');
+    el.type = 'button';
+    el.className = 'pack' + (p.best ? ' best' : '');
+    el.setAttribute('aria-label', `Pilih ${p.name} seharga Rp ${fmt(p.price)}`);
+    el.innerHTML = `
+      <div class="icon">${p.icon}</div>
+      <div class="name">${p.name}</div>
+      <div class="price">Rp ${fmt(p.price)}</div>
+      <div class="save">${p.save}</div>
+    `;
+    el.addEventListener('click', () => {
+      bought.push(p);
+      total += p.price;
+      cartItems.textContent = bought.map(b => b.name).join(', ');
+      cartTotal.textContent = fmt(total);
+      // flash the panel
+      document.querySelector('.panel').animate(
+        [{ boxShadow: '0 0 20px rgba(0,225,255,0.6)' }, { boxShadow: '0 0 40px rgba(255,46,196,0.4)' }],
+        { duration: 250, iterations: 1, direction: 'alternate' }
+      );
+    });
+    grid.appendChild(el);
+  });
+</script>
+</body>
+</html>
